@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ZTWDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="idAdministrator" />
+          </Key>
+          <Property Name="idAdministrator" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="char" MaxLength="20" />
+          <Property Name="haslo" Type="char" MaxLength="20" />
+          <Property Name="imie" Type="varchar" MaxLength="255" />
+          <Property Name="nazwisko" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="idAdres" />
+          </Key>
+          <Property Name="idAdres" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="miasto" Type="varchar" MaxLength="40" />
+          <Property Name="kodPocztowy" Type="char" MaxLength="6" />
+          <Property Name="ulica" Type="varchar" MaxLength="40" />
+          <Property Name="nrDomu" Type="int" />
+          <Property Name="nrLokalu" Type="int" />
+          <Property Name="KlientidKlient" Type="int" />
+          <Property Name="PracownikidPracownik" Type="int" />
+        </EntityType>
+        <EntityType Name="Kategoria">
+          <Key>
+            <PropertyRef Name="idKategoria" />
+          </Key>
+          <Property Name="idKategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazwaKategorii" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Klient">
+          <Key>
+            <PropertyRef Name="idKlient" />
+          </Key>
+          <Property Name="idKlient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="char" MaxLength="20" />
+          <Property Name="haslo" Type="char" MaxLength="20" />
+          <Property Name="imie" Type="varchar" MaxLength="30" />
+          <Property Name="nazwisko" Type="varchar" MaxLength="30" />
+          <Property Name="email" Type="char" MaxLength="255" />
+          <Property Name="nrTelefony" Type="char" MaxLength="9" />
+          <Property Name="ZnizkaidZnizka" Type="int" />
+          <Property Name="AdresidAdres" Type="int" />
+        </EntityType>
+        <EntityType Name="Pracownik">
+          <Key>
+            <PropertyRef Name="idPracownik" />
+          </Key>
+          <Property Name="idPracownik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="char" MaxLength="20" />
+          <Property Name="haslo" Type="char" MaxLength="20" />
+          <Property Name="imie" Type="varchar" MaxLength="30" />
+          <Property Name="nazwisko" Type="varchar" MaxLength="30" />
+          <Property Name="email" Type="char" MaxLength="255" />
+          <Property Name="nrTelefony" Type="char" MaxLength="9" />
+          <Property Name="stanowisko" Type="varchar" MaxLength="255" />
+          <Property Name="dataZatrudnienia" Type="datetime" />
+          <Property Name="ZnizkaidZnizka" Type="int" />
+          <Property Name="AdresidAdres" Type="int" />
+        </EntityType>
+        <EntityType Name="Produkt">
+          <Key>
+            <PropertyRef Name="idProdukt" />
+          </Key>
+          <Property Name="idProdukt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="255" />
+          <Property Name="kolor" Type="varchar" MaxLength="255" />
+          <Property Name="rozmiar" Type="char" MaxLength="10" />
+          <Property Name="ilosc" Type="int" />
+          <Property Name="cena" Type="int" />
+          <Property Name="ZdjecieidZdjecie" Type="int" />
+          <Property Name="KategoriaidKategoria" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="UPassword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EMail" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Zdjecie">
+          <Key>
+            <PropertyRef Name="idZdjecie" />
+          </Key>
+          <Property Name="idZdjecie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sciezkaJPG" Type="char" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Znizka">
+          <Key>
+            <PropertyRef Name="idZnizka" />
+          </Key>
+          <Property Name="idZnizka" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="znizka" Type="int" />
+        </EntityType>
+        <Association Name="FKKlient242107">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Klient" Type="Self.Klient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="idAdres" />
+            </Principal>
+            <Dependent Role="Klient">
+              <PropertyRef Name="AdresidAdres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKKlient982288">
+          <End Role="Znizka" Type="Self.Znizka" Multiplicity="0..1" />
+          <End Role="Klient" Type="Self.Klient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Znizka">
+              <PropertyRef Name="idZnizka" />
+            </Principal>
+            <Dependent Role="Klient">
+              <PropertyRef Name="ZnizkaidZnizka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPracownik234602">
+          <End Role="Znizka" Type="Self.Znizka" Multiplicity="0..1" />
+          <End Role="Pracownik" Type="Self.Pracownik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Znizka">
+              <PropertyRef Name="idZnizka" />
+            </Principal>
+            <Dependent Role="Pracownik">
+              <PropertyRef Name="ZnizkaidZnizka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPracownik494420">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Pracownik" Type="Self.Pracownik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="idAdres" />
+            </Principal>
+            <Dependent Role="Pracownik">
+              <PropertyRef Name="AdresidAdres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProdukt498528">
+          <End Role="Zdjecie" Type="Self.Zdjecie" Multiplicity="0..1" />
+          <End Role="Produkt" Type="Self.Produkt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zdjecie">
+              <PropertyRef Name="idZdjecie" />
+            </Principal>
+            <Dependent Role="Produkt">
+              <PropertyRef Name="ZdjecieidZdjecie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProdukt950014">
+          <End Role="Kategoria" Type="Self.Kategoria" Multiplicity="0..1" />
+          <End Role="Produkt" Type="Self.Produkt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoria">
+              <PropertyRef Name="idKategoria" />
+            </Principal>
+            <Dependent Role="Produkt">
+              <PropertyRef Name="KategoriaidKategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ZTWDatabaseModelStoreContainer">
+          <EntitySet Name="Administrator" EntityType="Self.Administrator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Adres" EntityType="Self.Adres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategoria" EntityType="Self.Kategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klient" EntityType="Self.Klient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pracownik" EntityType="Self.Pracownik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produkt" EntityType="Self.Produkt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zdjecie" EntityType="Self.Zdjecie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Znizka" EntityType="Self.Znizka" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FKKlient242107" Association="Self.FKKlient242107">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Klient" EntitySet="Klient" />
+          </AssociationSet>
+          <AssociationSet Name="FKKlient982288" Association="Self.FKKlient982288">
+            <End Role="Znizka" EntitySet="Znizka" />
+            <End Role="Klient" EntitySet="Klient" />
+          </AssociationSet>
+          <AssociationSet Name="FKPracownik234602" Association="Self.FKPracownik234602">
+            <End Role="Znizka" EntitySet="Znizka" />
+            <End Role="Pracownik" EntitySet="Pracownik" />
+          </AssociationSet>
+          <AssociationSet Name="FKPracownik494420" Association="Self.FKPracownik494420">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Pracownik" EntitySet="Pracownik" />
+          </AssociationSet>
+          <AssociationSet Name="FKProdukt498528" Association="Self.FKProdukt498528">
+            <End Role="Zdjecie" EntitySet="Zdjecie" />
+            <End Role="Produkt" EntitySet="Produkt" />
+          </AssociationSet>
+          <AssociationSet Name="FKProdukt950014" Association="Self.FKProdukt950014">
+            <End Role="Kategoria" EntitySet="Kategoria" />
+            <End Role="Produkt" EntitySet="Produkt" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ZTWDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="idAdministrator" />
+          </Key>
+          <Property Name="idAdministrator" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="haslo" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="imie" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="idAdres" />
+          </Key>
+          <Property Name="idAdres" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="miasto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="kodPocztowy" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="ulica" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="nrDomu" Type="Int32" />
+          <Property Name="nrLokalu" Type="Int32" />
+          <Property Name="KlientidKlient" Type="Int32" />
+          <Property Name="PracownikidPracownik" Type="Int32" />
+          <NavigationProperty Name="Klient" Relationship="Self.FKKlient242107" FromRole="Adres" ToRole="Klient" />
+          <NavigationProperty Name="Pracownik" Relationship="Self.FKPracownik494420" FromRole="Adres" ToRole="Pracownik" />
+        </EntityType>
+        <EntityType Name="Kategoria">
+          <Key>
+            <PropertyRef Name="idKategoria" />
+          </Key>
+          <Property Name="idKategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazwaKategorii" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Produkt" Relationship="Self.FKProdukt950014" FromRole="Kategoria" ToRole="Produkt" />
+        </EntityType>
+        <EntityType Name="Klient">
+          <Key>
+            <PropertyRef Name="idKlient" />
+          </Key>
+          <Property Name="idKlient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="haslo" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="imie" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="true" Unicode="false" />
+          <Property Name="nrTelefony" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="ZnizkaidZnizka" Type="Int32" />
+          <Property Name="AdresidAdres" Type="Int32" />
+          <NavigationProperty Name="Adres" Relationship="Self.FKKlient242107" FromRole="Klient" ToRole="Adres" />
+          <NavigationProperty Name="Znizka" Relationship="Self.FKKlient982288" FromRole="Klient" ToRole="Znizka" />
+        </EntityType>
+        <EntityType Name="Pracownik">
+          <Key>
+            <PropertyRef Name="idPracownik" />
+          </Key>
+          <Property Name="idPracownik" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="haslo" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="imie" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="true" Unicode="false" />
+          <Property Name="nrTelefony" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="stanowisko" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="dataZatrudnienia" Type="DateTime" Precision="3" />
+          <Property Name="ZnizkaidZnizka" Type="Int32" />
+          <Property Name="AdresidAdres" Type="Int32" />
+          <NavigationProperty Name="Adres" Relationship="Self.FKPracownik494420" FromRole="Pracownik" ToRole="Adres" />
+          <NavigationProperty Name="Znizka" Relationship="Self.FKPracownik234602" FromRole="Pracownik" ToRole="Znizka" />
+        </EntityType>
+        <EntityType Name="Produkt">
+          <Key>
+            <PropertyRef Name="idProdukt" />
+          </Key>
+          <Property Name="idProdukt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazwa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="kolor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="rozmiar" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="ilosc" Type="Int32" />
+          <Property Name="cena" Type="Int32" />
+          <Property Name="ZdjecieidZdjecie" Type="Int32" />
+          <Property Name="KategoriaidKategoria" Type="Int32" />
+          <NavigationProperty Name="Kategoria" Relationship="Self.FKProdukt950014" FromRole="Produkt" ToRole="Kategoria" />
+          <NavigationProperty Name="Zdjecie" Relationship="Self.FKProdukt498528" FromRole="Produkt" ToRole="Zdjecie" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Zdjecie">
+          <Key>
+            <PropertyRef Name="idZdjecie" />
+          </Key>
+          <Property Name="idZdjecie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sciezkaJPG" Type="String" MaxLength="255" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Produkt" Relationship="Self.FKProdukt498528" FromRole="Zdjecie" ToRole="Produkt" />
+        </EntityType>
+        <EntityType Name="Znizka">
+          <Key>
+            <PropertyRef Name="idZnizka" />
+          </Key>
+          <Property Name="idZnizka" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="znizka1" Type="Int32" />
+          <NavigationProperty Name="Klient" Relationship="Self.FKKlient982288" FromRole="Znizka" ToRole="Klient" />
+          <NavigationProperty Name="Pracownik" Relationship="Self.FKPracownik234602" FromRole="Znizka" ToRole="Pracownik" />
+        </EntityType>
+        <Association Name="FKKlient242107">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Klient" Type="Self.Klient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="idAdres" />
+            </Principal>
+            <Dependent Role="Klient">
+              <PropertyRef Name="AdresidAdres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPracownik494420">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Pracownik" Type="Self.Pracownik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="idAdres" />
+            </Principal>
+            <Dependent Role="Pracownik">
+              <PropertyRef Name="AdresidAdres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProdukt950014">
+          <End Role="Kategoria" Type="Self.Kategoria" Multiplicity="0..1" />
+          <End Role="Produkt" Type="Self.Produkt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoria">
+              <PropertyRef Name="idKategoria" />
+            </Principal>
+            <Dependent Role="Produkt">
+              <PropertyRef Name="KategoriaidKategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKKlient982288">
+          <End Role="Znizka" Type="Self.Znizka" Multiplicity="0..1" />
+          <End Role="Klient" Type="Self.Klient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Znizka">
+              <PropertyRef Name="idZnizka" />
+            </Principal>
+            <Dependent Role="Klient">
+              <PropertyRef Name="ZnizkaidZnizka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPracownik234602">
+          <End Role="Znizka" Type="Self.Znizka" Multiplicity="0..1" />
+          <End Role="Pracownik" Type="Self.Pracownik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Znizka">
+              <PropertyRef Name="idZnizka" />
+            </Principal>
+            <Dependent Role="Pracownik">
+              <PropertyRef Name="ZnizkaidZnizka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProdukt498528">
+          <End Role="Zdjecie" Type="Self.Zdjecie" Multiplicity="0..1" />
+          <End Role="Produkt" Type="Self.Produkt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zdjecie">
+              <PropertyRef Name="idZdjecie" />
+            </Principal>
+            <Dependent Role="Produkt">
+              <PropertyRef Name="ZdjecieidZdjecie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ZTWDatabaseEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrator" EntityType="Self.Administrator" />
+          <EntitySet Name="Adres" EntityType="Self.Adres" />
+          <EntitySet Name="Kategoria" EntityType="Self.Kategoria" />
+          <EntitySet Name="Klient" EntityType="Self.Klient" />
+          <EntitySet Name="Pracownik" EntityType="Self.Pracownik" />
+          <EntitySet Name="Produkt" EntityType="Self.Produkt" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Zdjecie" EntityType="Self.Zdjecie" />
+          <EntitySet Name="Znizka" EntityType="Self.Znizka" />
+          <AssociationSet Name="FKKlient242107" Association="Self.FKKlient242107">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Klient" EntitySet="Klient" />
+          </AssociationSet>
+          <AssociationSet Name="FKPracownik494420" Association="Self.FKPracownik494420">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Pracownik" EntitySet="Pracownik" />
+          </AssociationSet>
+          <AssociationSet Name="FKProdukt950014" Association="Self.FKProdukt950014">
+            <End Role="Kategoria" EntitySet="Kategoria" />
+            <End Role="Produkt" EntitySet="Produkt" />
+          </AssociationSet>
+          <AssociationSet Name="FKKlient982288" Association="Self.FKKlient982288">
+            <End Role="Znizka" EntitySet="Znizka" />
+            <End Role="Klient" EntitySet="Klient" />
+          </AssociationSet>
+          <AssociationSet Name="FKPracownik234602" Association="Self.FKPracownik234602">
+            <End Role="Znizka" EntitySet="Znizka" />
+            <End Role="Pracownik" EntitySet="Pracownik" />
+          </AssociationSet>
+          <AssociationSet Name="FKProdukt498528" Association="Self.FKProdukt498528">
+            <End Role="Zdjecie" EntitySet="Zdjecie" />
+            <End Role="Produkt" EntitySet="Produkt" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ZTWDatabaseModelStoreContainer" CdmEntityContainer="ZTWDatabaseEntities2">
+          <EntitySetMapping Name="Administrator">
+            <EntityTypeMapping TypeName="ZTWDatabaseModel.Administrator">
+              <MappingFragment StoreEntitySet="Administrator">
+                <ScalarProperty Name="idAdministrator" ColumnName="idAdministrator" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="haslo" ColumnName="haslo" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Adres">
+            <EntityTypeMapping TypeName="ZTWDatabaseModel.Adres">
+              <MappingFragment StoreEntitySet="Adres">
+                <ScalarProperty Name="idAdres" ColumnName="idAdres" />
+                <ScalarProperty Name="miasto" ColumnName="miasto" />
+                <ScalarProperty Name="kodPocztowy" ColumnName="kodPocztowy" />
+                <ScalarProperty Name="ulica" ColumnName="ulica" />
+                <ScalarProperty Name="nrDomu" ColumnName="nrDomu" />
+                <ScalarProperty Name="nrLokalu" ColumnName="nrLokalu" />
+                <ScalarProperty Name="KlientidKlient" ColumnName="KlientidKlient" />
+                <ScalarProperty Name="PracownikidPracownik" ColumnName="PracownikidPracownik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategoria">
+            <EntityTypeMapping TypeName="ZTWDatabaseModel.Kategoria">
+              <MappingFragment StoreEntitySet="Kategoria">
+                <ScalarProperty Name="idKategoria" ColumnName="idKategoria" />
+                <ScalarProperty Name="nazwaKategorii" ColumnName="nazwaKategorii" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klient">
+            <EntityTypeMapping TypeName="ZTWDatabaseModel.Klient">
+              <MappingFragment StoreEntitySet="Klient">
+                <ScalarProperty Name="idKlient" ColumnName="idKlient" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="haslo" ColumnName="haslo" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nrTelefony" ColumnName="nrTelefony" />
+                <ScalarProperty Name="ZnizkaidZnizka" ColumnName="ZnizkaidZnizka" />
+                <ScalarProperty Name="AdresidAdres" ColumnName="AdresidAdres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pracownik">
+            <EntityTypeMapping TypeName="ZTWDatabaseModel.Pracownik">
+              <MappingFragment StoreEntitySet="Pracownik">
+                <ScalarProperty Name="idPracownik" ColumnName="idPracownik" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="haslo" ColumnName="haslo" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nrTelefony" ColumnName="nrTelefony" />
+                <ScalarProperty Name="stanowisko" ColumnName="stanowisko" />
+                <ScalarProperty Name="dataZatrudnienia" ColumnName="dataZatrudnienia" />
+                <ScalarProperty Name="ZnizkaidZnizka" ColumnName="ZnizkaidZnizka" />
+                <ScalarProperty Name="AdresidAdres" ColumnName="AdresidAdres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produkt">
+            <EntityTypeMapping TypeName="ZTWDatabaseModel.Produkt">
+              <MappingFragment StoreEntitySet="Produkt">
+                <ScalarProperty Name="idProdukt" ColumnName="idProdukt" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="kolor" ColumnName="kolor" />
+                <ScalarProperty Name="rozmiar" ColumnName="rozmiar" />
+                <ScalarProperty Name="ilosc" ColumnName="ilosc" />
+                <ScalarProperty Name="cena" ColumnName="cena" />
+                <ScalarProperty Name="ZdjecieidZdjecie" ColumnName="ZdjecieidZdjecie" />
+                <ScalarProperty Name="KategoriaidKategoria" ColumnName="KategoriaidKategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ZTWDatabaseModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="UPassword" ColumnName="UPassword" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zdjecie">
+            <EntityTypeMapping TypeName="ZTWDatabaseModel.Zdjecie">
+              <MappingFragment StoreEntitySet="Zdjecie">
+                <ScalarProperty Name="idZdjecie" ColumnName="idZdjecie" />
+                <ScalarProperty Name="sciezkaJPG" ColumnName="sciezkaJPG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Znizka">
+            <EntityTypeMapping TypeName="ZTWDatabaseModel.Znizka">
+              <MappingFragment StoreEntitySet="Znizka">
+                <ScalarProperty Name="idZnizka" ColumnName="idZnizka" />
+                <ScalarProperty Name="znizka1" ColumnName="znizka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

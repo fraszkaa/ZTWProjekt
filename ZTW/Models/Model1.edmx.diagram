@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a0f387c11ee436098b4110d625eefbe" Name="Diagram1" ZoomLevel="77">
+        <EntityTypeShape EntityType="ZTWDatabaseModel.Administrator" Width="1.5" PointX="5.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZTWDatabaseModel.Adres" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZTWDatabaseModel.Kategoria" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZTWDatabaseModel.Klient" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZTWDatabaseModel.Pracownik" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZTWDatabaseModel.Produkt" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZTWDatabaseModel.Users" Width="1.5" PointX="7.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZTWDatabaseModel.Zdjecie" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZTWDatabaseModel.Znizka" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <AssociationConnector Association="ZTWDatabaseModel.FKKlient242107" ManuallyRouted="false" />
+        <AssociationConnector Association="ZTWDatabaseModel.FKPracownik494420" ManuallyRouted="false" />
+        <AssociationConnector Association="ZTWDatabaseModel.FKProdukt950014" ManuallyRouted="false" />
+        <AssociationConnector Association="ZTWDatabaseModel.FKKlient982288" ManuallyRouted="false" />
+        <AssociationConnector Association="ZTWDatabaseModel.FKPracownik234602" ManuallyRouted="false" />
+        <AssociationConnector Association="ZTWDatabaseModel.FKProdukt498528" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
